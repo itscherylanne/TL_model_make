@@ -1,0 +1,33 @@
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# virtualenv
+.venv
+venv/
+ENV/
+
+#folders
+config/original_configs
+
+data/*.record
+data/*.zip
+data/bosch
+data/CARLA_just_tl
+data/CARLA_loop_with_tl
+data/dataset-sdcnd-capstone
+data/sim_cheryl
+data/sim_training_subset
+
+models/backup
+models/faster_rcnn_inception_resnet_v2_atrous_coco_11_06_2017
+models/faster_rcnn_resnet101_coco_11_06_2017
+models/rfcn_resnet101_coco_11_06_2017
+models/ssd_inception_v2_coco_11_06_2017
+models/ssd_mobilenet_v1_coco_11_06_2017
+
+tensorflow/models/
+test_vid_jupyter/*.mp4
+
+AWS_bash\.txt
+
+AWS_bash_history\.txt
