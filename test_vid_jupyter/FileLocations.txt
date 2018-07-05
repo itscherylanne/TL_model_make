@@ -1,1 +1,13 @@
-https://drive.google.com/drive/folders/1VXO0yslDfj_QjeiOaPQuxl24e12awl3W
+The following links are to mp4 videos to test in a jupyter enviroment.
+
+Bosch Test Video
+https://drive.google.com/open?id=1a37HJgOTIhHH7ymf0Zz504rekKM_0q2H
+
+CARLA Just TL Video (corresponds to rosbag from Udacity)
+https://drive.google.com/open?id=1m2XyQfuazzgJGNEiTyiClh62VfT8EiB2
+
+CARLA TL Loop Video (corresponds to rosbag from Udacity)
+https://drive.google.com/open?id=1bWMCeW2F85j0UoAm1WuB7lfHpO-tOafz
+
+Cheryl's Simulation Data collection video
+https://drive.google.com/open?id=1p6c7Z7iiA8fRlHw_J4_6hE9Hha82B7DO
