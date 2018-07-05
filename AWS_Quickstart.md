@@ -7,7 +7,6 @@ This is based off of other Udacity student's TL Detection projects. You may find
 https://github.com/alex-lechner/Traffic-Light-Classification
 https://github.com/swirlingsand/deeper-traffic-lights
 
-
 -------------
 ### Getting your Term 3 AWS Credits from Udacity
 
@@ -22,14 +21,14 @@ If the link above does not work, you can find the link in your classroom resourc
 To set up an AWS spot instance do the following steps:
 1. [Login to your Amazon AWS Account][aws login]
 2. Navigate to ``EC2`` -> ``Instances`` -> ``Spot Requests`` -> ``Request Spot Instances``
-3. Under ``AMI`` click on ``Search for AMI``, type ``udacity-carnd-advanced-deep-learning`` in the search field, choose ``Community AMIs`` from the drop-down and select the AMI (**This AMI is only available in US Regions so make sure you request a spot instance from there!**)
+3. Under ``AMI`` click on ``Search for AMI``, type ``udacity-carnd-advanced-deep-learning`` in the search field, choose ``Community AMIs`` from the drop-down and select the AMI (**This AMI is only available in US Regions so make sure you request a spot instance from there!**)Development/TL_model_make/data/bosch_train.record
 4. Delete the default instance type, click on ``Select`` and select the ``g2.2xlarge`` instance
 5. **IMPORTANT** Uncheck the ``Delete`` checkbox under ``EBS Volumes`` so your progress is not deleted when the instance get's terminated.
 
   **CAEd: LESSON LEARNED: I didn't do this and lost several whole day's worth of trained data.** If you know how to recover the data, after the instance is terminated (and deleted), please let me know so we can update this markdown file to include the steps for gathering that data.
 
 6. Set ``Security Groups`` to ``default``
-  **NOTE:** if you cannot connect to your instance on SSH, you may be able to add the security group settings from Term 1 (i.e. Launch Wizard or Jupyter). You can do this after your instance has launched. Then try connecting via SSH again
+  **NOTE:** if you cannot connect to your instance on SSH, you may be able to add the security group settings from Term 1 (i.e. Launch Wizard or Jupyter). You can do this after your instance has launched. Then try connecting via SSH again.
 7. Select your key pair under ``Key pair name`` (if you don't have one create a new key pair) **SAVE THIS PEM file and distribute it if you want to log into your instance from different computers**
 8. At the very bottom set ``Request valid until`` to about **24 - 48 hours** (if you're running it while you go to work. I am setting mine to last a week because I am currently anticipating the birth of my child) and set ``Terminate instances at expiration`` as checked (You don't have to do this but keep in mind to receive a very large bill from AWS if you forget to terminate your spot instance because the default value for termination is set to 1 year.)
 9. Click ``Launch``, wait until the instance is created and then connect to your instance via ssh
@@ -39,25 +38,104 @@ Follow AWS's instruction for logging into your instance.
 
 **Note:** If you did not add your .pem file to your environment paths, make sure your terminal either references the fullpath to the .pem file or that you are connecting to your instance from the same directory as the .pem file.
 
+**NOTE:** log in as `ubuntu` and not as `root`
+```
+cd wherever/your/pem/file_may_be
+chmod 400 capstone.pem
+ssh -i "capstone.pem" ubuntu@ec2-<SOME_IP_ADDRESS>.us-west-1.compute.amazonaws.com
+```
+
 ### Setting up your environment
 
 1. Clone this repository to your instance
-`git clone https://github.com/itscherylanne/TL_model_make`
+```
+git clone https://github.com/itscherylanne/TL_model_make
+```
 2. Go into repo directory
-`cd TL_model_make`
+```
+cd TL_model_make
+```
 3. Get updates, setup tensorflow to version 1.4 and check out the TF model creation repository (that works with TF v1.4)
-`./01_tf_setup.sh`
+```
+chmod +x 01_tf_setup.sh
+./01_tf_setup.sh
+```
 4. Download and unzip pre-trained models into the **model** folder
-`./02_download_and_unzip_models.sh`
-5.  Download TF record files into the **data** folder
-`./03_download_TF_records.sh`
+```
+chmod +x 02_download_and_unzip_models.sh
+./02_download_and_unzip_models.sh
+```
 
-###
+5.  Download TF record files into the **data** folder on your LOCAL computer. I unfortunately could not figure out how to script downloading from my Google drive directly into my EC2 instance.
+
+There are 4 different TF record files:
+- [real_data.record] (https://drive.google.com/open?id=1ezhKl2B4T_TJv-eJYsU_ub_bmMKi8iwr)
+- [sim_data.record] (https://drive.google.com/open?id=1I1OV2Mi1regq73U4wOXue4qEldgjZaob)
+- [bosch_train.record] (https://drive.google.com/open?id=1iBmPV182itpleDSv8ZHviNwa4v_MoExR)
+- [bosch_train_14labels.record] (https://drive.google.com/open?id=1e7mYNrVtYrwW3XjDjUMzIHBI69XcsJIH)
 
 
+6. Upload TF record files from local to your EC2 instance. Unfortunately, I was not able to get a script to work for this step, so you may have to manually enter the commands in your local terminal. You will need to do this for each of the record files you wish to train with.
 
+The <SOME_IP_ADDRESS> corresponds to the address from the section `Logging into your Instance`
+
+General command:
+```
+scp -i <FULLPATH_TO_YOUR_PEM_FILE> \
+  <LOCATION_OF_YOUR_RECORD_FILE> \
+  ubuntu@ec2-<SOME_IP_ADDRESS>.us-west-1.compute.amazonaws.com:~/TL_model_make/data
+```
+
+
+Example for bosch_train.record:
+```
+scp -i ~/capstone.pem \
+  ~/Development/TL_model_make/data/bosch_train.record  \
+  ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/data
+```
+
+### Setting up your config file.
+You will need to download a local copy of the model's configuration files. I have included those files for your convenience in `config\original_configs`.
+
+There are
+
+
+Upload the config file to your EC2 instance.
+
+Example:
+```
+scp -i ~/capstone.pem \
+        ~/Development/TL_model_make/config/ssd_inception_v2_coco.config \
+        ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/config
+```
+
+### Training your models
+I already have a copy of the `train.py` script from `tensorflow/models/research/object_detection`. All you need to do is run the command:
+
+```
+python train.py --logtostderr --train_dir=./models/train --pipeline_config_path=./config/your_tensorflow_model.config
+```
+
+
+### Exporting your model  / Freezing the Graph
+When training is finished the trained model needs to be exported as a frozen inference graph. Udacity's Carla has TensorFlow Version 1.3 installed. However, the minimum version of TensorFlow needs to be Version 1.4 in order to freeze the graph but note that this does not raise any compatibility issues.
+
+
+To freeze the graph:
+```
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path ./config/your_tensorflow_model.config --trained_checkpoint_prefix ./models/train/model.ckpt-20000 --output_directory models
+```
+This will freeze and output the graph as ``frozen_inference_graph.pb``.
+
+
+Download your frozen graph to your local computer:
+```
+scp -i ~/capstone.pem \
+        ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/models/train/frozen_inference_graph.pb \
+        ~/Development/TL_model_make/model/train/<some_unique_name>_frozen_inference_graph.pb
+```   
 ---------------
-
+### Random notes to self
 ```
 cd tensorflow/models/research
 protoc object_detection/protos/*.proto --python_out=.

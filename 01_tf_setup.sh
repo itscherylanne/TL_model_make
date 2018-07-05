@@ -8,8 +8,7 @@ pip install tensorflow-gpu==1.4
 sudo apt-get install protobuf-compiler python-pil python-lxml python-tk
 
 echo "[01_tf_setup.sh] setting up local tensorflow folder structure."
-mkdir tensorflow
-cd tensorflow
+cd ../tensorflow
 
 echo "[01_tf_setup.sh] cloning TF models repository."
 git clone https://github.com/tensorflow/models.git
@@ -27,6 +26,6 @@ echo "[01_tf_setup.sh] Testing model builder."
 python object_detection/builders/model_builder_test.py
 
 echo "[01_tf_setup.sh] returning to original folder."
-cd ../../..
+cd ../../../TL_model_make
 
 echo "[01_tf_setup.sh] Exiting Script."
