@@ -86,7 +86,6 @@ scp -i <FULLPATH_TO_YOUR_PEM_FILE> \
   ubuntu@ec2-<SOME_IP_ADDRESS>.us-west-1.compute.amazonaws.com:~/TL_model_make/data
 ```
 
-
 Example for bosch_train.record:
 ```
 scp -i ~/capstone.pem \
@@ -119,7 +118,6 @@ python train.py --logtostderr --train_dir=./models/train --pipeline_config_path=
 
 ### Exporting your model  / Freezing the Graph
 When training is finished the trained model needs to be exported as a frozen inference graph. Udacity's Carla has TensorFlow Version 1.3 installed. However, the minimum version of TensorFlow needs to be Version 1.4 in order to freeze the graph but note that this does not raise any compatibility issues.
-
 
 To freeze the graph:
 ```
