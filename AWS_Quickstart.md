@@ -96,15 +96,19 @@ scp -i ~/capstone.pem \
 ### Setting up your config file.
 You will need to download a local copy of the model's configuration files. I have included those files for your convenience in `config\original_configs`.
 
-There are
-
+There are a few parameters you need to be aware of that require updating:
+- `input_path:` This should be set to your .record file that you are using for training.
+- `label_map_path:` This contains the indices for the labels corresponding to your .record file. Most files should utilize `labels\udacity_label_map.pbtext` the only exception is for `data\bosch_train_14labels.record` which should utilize `labels\bosch_14label_map.pbtxt`
+- `num_steps:` Reduce this down to 20000
+- `batch_size:` Reduce this to 3. You will get a resource error for any value larger than 3.
+- `fine_tune_checkpoint:` Location where you wish for the .ckpt files to be saved. I decided just to keep it where the original model should be.
 
 Upload the config file to your EC2 instance.
 
 Example:
 ```
 scp -i ~/capstone.pem \
-        ~/Development/TL_model_make/config/ssd_inception_v2_coco.config \
+        ~/Development/TL_model_make/config/ssd_inception_v2_bosch_train_udacity_label.config \
         ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/config
 ```
 
