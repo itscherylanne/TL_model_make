@@ -29,6 +29,7 @@ To set up an AWS spot instance do the following steps:
   **CAEd: LESSON LEARNED: I didn't do this and lost several whole day's worth of trained data.** If you know how to recover the data, after the instance is terminated (and deleted), please let me know so we can update this markdown file to include the steps for gathering that data.
 
 6. Set ``Security Groups`` to ``default``
+  **NOTE:** if you cannot connect to your instance on SSH, you may be able to add the security group settings from Term 1 (i.e. Launch Wizard or Jupyter). You can do this after your instance has launched. Then try connecting via SSH again
 7. Select your key pair under ``Key pair name`` (if you don't have one create a new key pair) **SAVE THIS PEM file and distribute it if you want to log into your instance from different computers**
 8. At the very bottom set ``Request valid until`` to about **24 - 48 hours** (if you're running it while you go to work. I am setting mine to last a week because I am currently anticipating the birth of my child) and set ``Terminate instances at expiration`` as checked (You don't have to do this but keep in mind to receive a very large bill from AWS if you forget to terminate your spot instance because the default value for termination is set to 1 year.)
 9. Click ``Launch``, wait until the instance is created and then connect to your instance via ssh
@@ -69,45 +70,4 @@ cd ../../..
 python train.py --logtostderr \
       --train_dir=./models/ssd_inception_v2_coco_11_06_2017/ \
       --pipline_config_path=./config/ssd_inception_v2_coco.config
-```
-------------------------
-## Commands to upload TF record files to aws
-
-```
-scp -i ~/capstone.pem \
-  ~/Development/TL_model_make/data/bosch/bosch_train.record  \
-  ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/data
-
-scp -i ~/capstone.pem \
-  ~/Development/TL_model_make/data/bosch/bosch_train_14labels.record \
-  ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/data
-
-scp -i ~/capstone.pem \
-  ~/Development/TL_model_make/data/dataset-sdcnd-capstone/sim_data.record \
-  ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/data
-
-scp -i ~/capstone.pem \
-  ~/Development/TL_model_make/data/dataset-sdcnd-capstone/real_data.record \
-  ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/data
-
-scp -i ~/capstone.pem \
-    ~/Development/TL_model_make/data/udacity_label_map.pbtxt \
-    ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/labels
-
-scp -i ~/capstone.pem \
-      ~/Development/TL_model_make/data/bosch_14label_map.pbtxt \
-      ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/labels
-
-scp -i ~/capstone.pem \
-            ~/Development/TL_model_make/data/coco_label_map.pbtxt \
-            ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/labels
-
-scp -i ~/capstone.pem \
-        ~/Development/TL_model_make/config/ssd_inception_v2_coco.config \
-        ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/config/         
-
-
-scp -i ~/capstone.pem \
-    ubuntu@ec2-52-53-215-45.us-west-1.compute.amazonaws.com:~/.bashrc \
-       ~/Development/TL_model_make\AWS_bash.txt
 ```

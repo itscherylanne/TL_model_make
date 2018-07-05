@@ -7,7 +7,6 @@ venv/
 ENV/
 
 #folders
-config/original_configs
 
 data/*.record
 data/*.zip
