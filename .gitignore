@@ -27,7 +27,3 @@ models/ssd_mobilenet_v1_coco_11_06_2017
 
 tensorflow/models/
 test_vid_jupyter/*.mp4
-
-AWS_bash\.txt
-
-AWS_bash_history\.txt

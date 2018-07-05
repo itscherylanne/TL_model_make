@@ -1,0 +1,1029 @@
+ls
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+ls
+sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb 
+sudo apt update
+sudo apt install cuda
+nvidia-smi
+ls
+mkdir downloads
+mv cuda-repo-ubuntu1604_8.0.61-1_amd64.deb downloads/
+ls
+wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v6/prod/8.0_20170427/cudnn-8.0-linux-x64-v6.0-tgz
+wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh
+bash Anaconda3-4.4.0-Linux-x86_64.sh 
+python
+sudo apt update
+sudo apt upgrade
+ls
+mv Anaconda3-4.4.0-Linux-x86_64.sh downloads/
+ls
+git clone https://github.com/tensorflow/tensorflow 
+cd /usr/local/cuda/include
+ls
+wget https://s3-us-west-1.amazonaws.com/tensorrt-ubuntu-1404/cudnn.h
+sudo wget https://s3-us-west-1.amazonaws.com/tensorrt-ubuntu-1404/cudnn.h
+ls
+cd ..
+cd lib64
+ls
+sudo wget https://s3-us-west-1.amazonaws.com/tensorrt-ubuntu-1404/libcudnn.so.6.0.21
+sudo wget https://s3-us-west-1.amazonaws.com/tensorrt-ubuntu-1404/libcudnn_static.a
+sudo ln -s libcudnn.so.6.0.21 libcudnn.so.6
+sudo ln -s libcudnn.so.6.0.21 libcudnn.so
+ls
+cd
+ls
+sudo apt-get install libcupti-dev 
+ls
+echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
+sudo apt-get update && sudo apt-get install bazel
+ls
+cd tensorflow/
+ls
+git log
+ls
+./configure 
+bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package 
+bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package 
+bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+which pip
+pip install /tmp/tensorflow_pkg/tensorflow-1.2.0rc2-cp36-cp36m-linux_x86_64.whl 
+cd
+python
+exit
+ls
+cd downloads/
+python
+gcc
+gcc -V
+gcc --version
+echo $LD_LIBRARY_PATH
+cd
+ldd anaconda3/lib/python3.6/site-packages/tensorflow/python/_pywrap_tensorflow_internal.so 
+conda install libgcc
+python -c "import tensorflow"
+python
+ls
+cd tensorflow/
+ls
+bazel build tensorflow/python/tools:freeze_graph
+bazel build tensorflow/tools/graph_transforms:transform_graph
+ls
+cd tensorflow/; bazel build tensorflow/tools/graph_transforms:transform_graph
+bazel-bin/tensorflow/tools/graph_transforms/transform_graph
+bazel-bin/tensorflow/python/tools/freeze_graph
+ls
+cd
+ls
+cd tensorflow/
+bazel build tensorflow/compiler/aot/tfcompile
+cd tensorflow/
+ls
+bazel build tensorflow/compiler/aot/tfcompile
+bazel-bin/tensorflow/compiler/aot/tfcompile
+ls
+cd ..
+cd code/
+ls
+python mnist_softmax_xla.py 
+sudo apt libcupti-dev
+sudo apt install libcupti-dev
+ls /usr/local/cuda/lib64
+ls -l /usr/local/cuda/lib64
+ls -l /usr/local/cuda/lib64/libcud*
+ls -l /usr/local/cuda/extras/CUPTI/
+ls -l /usr/local/cuda/extras/CUPTI/lib64/
+vim ~/.bashrc
+ls
+exit
+cd code/
+python mnist_softmax_xla.py 
+echo $LD_LIBRARY_PATH 
+python mnist_softmax_xla.py 
+vim ~/.bashrc
+python mnist_softmax_xla.py 
+python code/mnist_softmax_xla.py 
+echo $LD_LIBRARY_PATH 
+ls /usr/local/cuda/extras/lib64
+ls /usr/local/cuda/extras/
+ls /usr/local/cuda/extras/CUPTI/
+ls /usr/local/cuda/extras/CUPTI/lib64/
+vim ~/.bashrc
+mkdir code
+cd code/
+ls
+vim mnist.py
+ls
+touch infer.py
+ls
+vim mnist_softmax_xla.py
+ls
+python mnist.py 
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --help
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pb --input_checkpoint=output --output_graph=frozen.pb --output_node_names="softmax"
+vim mnist.py 
+python mnist
+python code/mnist_softmax_xla.py 
+echo $LD_LIBRARY_PATH 
+cd /usr/local/cuda/extras/
+vim ~/.bashrc
+source ~/.bashrc
+echo $LD_LIBRARY_PATH 
+python code/mnist_softmax_xla.py 
+cd
+python code/mnist_softmax_xla.py 
+ls
+cd code/
+ls
+less mnist_softmax_xla.py 
+vim mnist_softmax_xla.py 
+python mnist_softmax_xla.py 
+TF_XLA_FLAGS=--xla_generate_hlo_graph=.* python mnist_softmax_xla.py
+ls
+python mnist_softmax_xla.py --xla
+python mnist_softmax_xla.py
+python mnist.py 
+vim mnist.py 
+python mnist.py 
+vim mnist.py 
+python mnist.py 
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pb --input_checkpoint=output --output_node_names="softmax" --output_graph=frozen.pb
+vim mnist.py 
+python mnist.py 
+vim mnist.py 
+ls
+python mnist.py 
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pb --input_checkpoint=output --output_node_names="softmax" --output_graph=frozen.pb
+python
+vim mnist.py 
+python mnist.py 
+vim mnist.py 
+python mnist.py 
+vim mnist.py 
+python mnist.py 
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pb --input_checkpoint=output --output_node_names="softmax" --output_graph=frozen.pb
+exit
+ls
+cd code/
+ls
+vim mnist.py 
+ls
+rm output.*
+ls
+rm graph.pb 
+ls
+rm timeline.ctf.json 
+ls
+rm checkpoint 
+ls
+python mnist.py 
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --input_checkpoint=output --output_node_names=softmax --output_graph=frozen.pb
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --input_checkpoint=graph.ckpt --output_node_names=softmax --output_graph=frozen.pb
+python
+ls
+vim mnist.py 
+python mnist.py 
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --input_checkpoint=graph.ckpt --output_node_names=softmax --output_graph=frozen.pb
+ls
+bazel build -config=opt tensorflow/python/tools:optimize_for_inference
+cd ~/tensorflow/
+bazel build -config=opt tensorflow/python/tools:optimize_for_inference
+bazel build --config=opt tensorflow/python/tools:optimize_for_inference
+bazel build tensorflow/python/tools:optimize_for_inference
+bazel build -c opt //tensorflow/compiler/aot:tfcompile
+bazel build -c opt //tensorflow/python/tools:optimize_for_inference
+bazel build -c opt //tensorflow/python/tools:freeze_graph
+bazel build -c opt //tensorflow/tools/graph_transforms:transform_graph
+ls
+cd
+cd ~/code/
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --input_checkpoint=graph.ckpt --output_node_names=softmax --output_graph=frozen.pb
+python
+python mnist_softmax_xla.py 
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/optimize_for_inference --input=frozen.pb --output=optimized.pb --frozen_graph=True --input_names=x --output_names=softmax
+ls
+ls -l
+ls -
+ls -larth
+ipython
+ls
+cd
+ls
+vim steps.txt
+rm steps.txt 
+ls
+ipython
+less code/mnist.py 
+ls
+cd code/
+ls
+cd segnet/
+ls
+mkdir data
+ls
+cd data/
+ls
+wget http://www.cvlibs.net/download.php?file=data_road.zip
+ls
+unzip download.php\?file\=data_road.zip 
+rm download.php\?file\=data_road.zip 
+wget http://kitti.is.tue.mpg.de/kitti/data_road.zip
+ls
+exit
+ls
+top
+ls
+cd code/
+ls
+mkdir segnet
+cd segnet/
+ls
+wget https://s3-us-west-1.amazonaws.com/tensorrt-ubuntu-1404/saved_model.zip
+ls
+unzip saved_model.zip 
+sudo apt install unzip
+unzip saved_model.zip 
+ls
+ls saved
+rm saved_model.zip 
+ls
+mv saved/* .
+ls
+rm -rf saved
+ls
+ls -larth
+ls -larth variables/
+ls
+ls variables/
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=saved_model.pb --output=frozen.pb --input_checkpoint=variables/variables \
+bazel build tensorflow/tools/graph_transforms:summarize_graph
+cd ~/tensorflow/
+bazel build tensorflow/tools/graph_transforms:summarize_graph
+bazel-bin/tensorflow/tools/graph_transforms/summarize_graph --in_graph=~/code/segnet/saved_model.pb 
+bazel-bin/tensorflow/tools/graph_transforms/summarize_graph --in_graph=~/code/graph.pbtxt
+bazel-bin/tensorflow/tools/graph_transforms/summarize_graph --in_graph=~/code/frozen.pb
+cd
+cd code/
+cd segnet/
+ls
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/summarize_graph --in_graph=saved_model.pb
+ls
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/summarize_graph --in_graph=saved_model.pb
+ipython
+less saved_model.pb 
+file saved_model.pb 
+file ../graph.pbtxt 
+file ../frozen.pb 
+file ../optimized.pb 
+cd ..
+ls
+vim infer.py 
+ls
+python mnist.py 
+ls
+vim infer.py 
+ls
+python infer.py --input_graph=frozen.pb
+ipython
+vim infer.py 
+python infer.py --input_graph=frozen.pb
+ls
+python infer.py --input_graph=frozen.pb
+vim infer.py 
+ls
+sudo add-apt-repository ppa:neovim/unstable
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt-get update
+sudo apt-get install neovim
+ls
+nvim
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+sudo update-alternatives --config vi
+sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+sudo update-alternatives --config vim
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+sudo update-alternatives --config editor
+vi
+mkdir -p ~/.config/nvim
+ls
+vi ~/.config/nvim/init.vim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vi ~/.config/nvim/init.vim
+which pip
+pip install neovim
+vi ~/.config/nvim/
+ls
+v
+vi
+conda install jedi
+conda install yapf
+pip install yapf
+vi ~/.config/nvim/init.vim 
+vi
+ls
+vi mnist.py 
+
+python infer.py --input_graph=frozen.pb
+ls
+ipython
+ls
+cd segnet/
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --output=frozen.pb --input_checkpoint=ckpt/graph.ckpt --output_nodes_names="Softmax"
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --output_graph=frozen.pb --input_checkpoint=ckpt/graph.ckpt --output_nodes_names="Softmax"
+ls
+ls saved_model.pb 
+ls 
+ls -larth
+ls -larth ckpt/
+ls
+nvim load.py
+ls
+rm graph.pbtxt 
+rm -rf ckpt/
+python load.py --help
+ls
+cat load.py 
+vi load.py 
+ls
+cat load.py 
+python load.py --tag_name=fcn --saved_model_dir=. --checkpoint_dir=ckpt --output_graph=fcn.pbtxt
+vi load.py 
+python load.py --tag_name=fcn --saved_model_dir=. --checkpoint_dir=ckpt --output_graph=fcn.pbtxt
+ls -larth
+free -g
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --output_graph=frozen.pb --input_checkpoint=ckpt/graph.ckpt --output_nodes_names="Softmax"
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --output_graph=frozen.pb --input_checkpoint=ckpt/ckpt --output_nodes_names="Softmax"
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=graph.pbtxt --output_graph=frozen.pb --input_checkpoint=ckpt --output_nodes_names="Softmax"
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=fcn.pbtxt --output_graph=frozen.pb --input_checkpoint=ckpt --output_nodes_names="Softmax"
+python
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=fcn.pbtxt --output_graph=frozen.pb --output_nodes_names="Softmax"
+cd
+wget https://github.com/tensorflow/tensorflow/tree/master/tools/tf_env_collect.sh
+ls
+bash tf_env_collect.sh 
+less tf_env_collect.sh 
+rm tf_env_collect.sh 
+wget https://raw.githubusercontent.com/tensorflow/tensorflow/master/tools/tf_env_collect.sh
+bash tf_env_collect.sh 
+cat tf_env.txt 
+bazel --version
+bazel -V
+bazel version
+ls
+ls -larth
+cd code/segnet/
+ls
+ls -larth
+
+cat load.py 
+free -g
+CUDA_VISIBLE_DEVICES="" ~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=fcn.pbtxt --output_graph=frozen.pb --output_nodes_names="Softmax"
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/optimize_for_inference --input=fcn.pbtxt --output=optimized.pb --frozen_graph=False --input_names=Placeholder_1 --output_names=Softmax
+CUDA_VISIBLE_DEVICES="" ~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=fcn.pbtxt --output_graph=frozen.pb --output_nodes_names="Softmax"
+ls
+cd code/
+ls
+cd segnet/
+ls
+ipython
+ls
+cd ..
+cd
+ls
+cd code/
+ls
+cd segnet/
+ls
+ls -larth
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=fcn.pb --output_graph=frozen_graph.pb --output_nodes_names=Softmax --input_checkpint=cpkt
+ls
+ls -larth
+vi
+cat load.py 
+python load.py --tag_name=fcn --saved_model_dir=. --checkpoint_dir=ckpt --output_graph=base_graph.pb
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb \ 
+--output_nodes_names=Softmax
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_nodes_names=Softmax
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/optimize_for_inference --input=frozen_graph.pb --output=optimized_graph.pb --frozen_graph=True --input_names=image_input --output_names=Softmax
+ls
+ls -larth
+rm frozen.pb
+rm fcn.pb
+ls
+ls -l
+ls
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pbp \
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+ls
+ls -larth
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_convolutions
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_resize_and_conv
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+ls
+nvim benchmark.py
+ls
+ls data/
+cd data/
+ls
+unzip data_road.zip 
+ls
+rm data_road.zip 
+ls
+ls data_road/
+ls data_road/testing/
+ls data_road/testing/image_2/
+file data_road/testing/image_2/um_000000.png 
+file data_road/testing/image_2/um_000001.png 
+ls
+cd code/
+cd segnet/
+ls
+vim infer.py
+ls
+python infer.py --graph=frozen_graph.pb
+vim infer.py
+python infer.py --graph=frozen_graph.pb
+ls
+python infer.py --graph=optimized_graph.pb
+vim infer.py
+python infer.py --graph=optimized_graph.pb
+vim infer.py
+python infer.py --graph=optimized_graph.pb
+vim infer.py
+python infer.py --graph=optimized_graph.pb
+python infer.py --graph=optimized_graph.pb --use_xla=True
+python infer.py --graph=eightbit_graph.pb --use_xla=True
+python infer.py --graph=eightbit_graph.pb
+vim infer.py
+python infer.py --graph=eightbit_graph.pb
+CUDA_VISIBLE_DEVICES="" python infer.py --graph=optimized_graph.pb --use_xla=True
+ls
+ipython
+ls
+vim infer.py 
+ls
+cat infer.py 
+ls
+cd code/segnet/
+ls
+echo $HOME
+python3 -m http.server
+pwd
+ls
+ipython
+cd
+ls
+mkdir transforms-walkthrough
+cd transforms-walkthrough/
+ls
+mkdir solution
+ls
+touch README.md
+ls
+mkdir src
+ls
+cp ~/code/segnet/infer.py src/graph_utils.py
+cd src/
+ls
+cat graph_utils.py 
+ls
+cd ..
+ls
+mv solution graphs
+ls
+cp ~/code/segnet/base_graph.pb graphs/
+cp ~/code/segnet/frozen_graph.pb graphs/
+cp ~/code/segnet/optimized_graph.pb graphs/
+cp ~/code/segnet/eightbit_graph.pb graphs/
+ls
+ls -larth graphs/
+ls
+mv graphs/base_graph.pb src/
+ls
+ls src/
+ls
+vim README.md 
+ls
+cd ..
+ls
+rm old-tf_env.txt 
+ls downloads/
+rm -rf downloads/
+ls
+rm tf_env_collect.sh 
+rm tf_env.txt 
+rm timeline.ctf.json 
+ls
+ls code/
+rm -rf code/
+ls
+cd tensorflow/
+ls
+git status
+git pull
+git checkout v1.2.1
+git log
+ls
+./configure 
+bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package 
+bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+pip install /tmp/tensorflow_pkg/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl 
+ls
+bazel build -c opt //tensorflow/python/tools:freeze_graph
+bazel build tensorflow/tools/graph_transforms:transform_graph
+bazel build -c opt tensorflow/tools/graph_transforms:transform_graph
+python
+ls
+bazel build -c opt tensorflow/python/tools:optimize_for_inference
+ls
+cd
+ls
+cd transforms-walkthrough/
+ls
+cat README.md 
+cd src/
+ls
+cd
+ls
+python
+cd transforms-walkthrough/
+ls
+cd ..
+mv transforms-walkthrough/ inference-walkthrough
+ls
+cd inference-walkthrough/
+ls
+ls src/
+cat README.md 
+cd src/
+ls
+ls ../graphs/
+ls
+pwd
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb \ 
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb \ 
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+ls
+ipython
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/optimize_for_inference --input=frozen_graph.pb --output=optimized_graph.pb --frozen_graph=True --input_names=image_input --output_names=Softmax
+ls
+cd tensorflow/
+ls
+./configure 
+$ bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package 
+bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package 
+bazel build -c opt //tensorflow/python/tools:freeze_graph
+ls /tmp/
+bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package 
+bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+pip install /tmp/tensorflow_pkg/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl 
+pip install -U /tmp/tensorflow_pkg/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl 
+pip install /tmp/tensorflow_pkg/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl 
+pip install --ignore-installed /tmp/tensorflow_pkg/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl 
+bazel build -c opt //tensorflow/python/tools:freeze_graph
+bazel build -c opt tensorflow/python/tools:optimize_for_inference
+cd
+ls
+cd inference-walkthrough/
+ls
+cd src/
+ls
+rm -rf __pycache__/
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb \ 
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/optimize_for_inference --input=frozen_graph.pb --output=optimized_graph.pb --frozen_graph=True --input_names=image_input --output_names=Softmax
+ls
+rm optimized_graph.pb 
+~/tensorflow/bazel-bin/tensorflow/python/tools/optimize_for_inference --input=frozen_graph.pb --output=optimized_graph.pb --frozen_graph=True --input_names=image_input --output_names=Softmax
+ls
+ipython
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_resize_and_conv
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+cd
+cd tensorflow/
+bazel build -c opt tensorflow/tools/graph_transforms:transform_graph
+cd inference-walkthrough/
+ls
+cd src/
+ls
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_resize_and_conv
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+ls
+cd inference-walkthrough/
+ls
+cd src/
+ls
+rm eightbit_graph.pb 
+rm frozen_graph.pb 
+rm optimized_graph.pb 
+ls
+rm -rf __pycache__/
+ls
+cd ..
+nvim README.md 
+ls
+cd ..
+ls
+exit
+cd inference-walkthrough/
+ls
+cd graphs/
+ls
+rm *.pb
+ls
+cd ..
+ls
+rm -rf graphs/
+nvim README.md 
+cd tensorflow/
+bazel build -c opt tensorflow/tools/graph_transforms:transform_graph
+ls
+cd
+ls
+cd inference-walkthrough/src/
+ls
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_resize_and_conv
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+ls
+ls ../graphs/
+ls
+python
+ls
+cd inference-walkthrough/src
+ls
+python ~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+ls
+cd ..
+cd tensorflow
+cd bazel-bin/tensorflow/python
+ls
+cd tools
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb \
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph.py --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+python ~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph.py --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+python ~/tensorflow/tensorflow/python/tools/freeze_graph.py --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+cd ..
+ls
+cd inference-walkthrough/src
+python ~/tensorflow/tensorflow/python/tools/freeze_graph.py --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+sudo apt-get remove nvidia-*
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.66/NVIDIA-Linux-x86_64-375.66.run
+sudo bash ./NVIDIA-Linux-x86_64-375.66.run  --dkms
+python ~/tensorflow/tensorflow/python/tools/freeze_graph.py --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+python
+python ~/tensorflow/tensorflow/python/tools/optimize_for_inference.py --input=frozen_graph.pb --output=optimized_graph.pb --frozen_graph=True --input_names=image_input --output_names=Softmax
+python
+cd ..
+ls
+cd tensorflow
+cd tensorflow/python/tools
+ls
+cd ..
+ls
+cd ..
+ls
+cd tools
+ls
+cd ..
+ls
+cd bazel-tensorflow
+ls
+cd tools
+ls
+cd ..
+ls
+cd tensorflow
+ls
+cd tools
+ls
+cd graph_transforms
+ls
+cd python
+ls
+cd ..
+ls
+cd bazel-bin
+ls
+cd tensorflow
+ls
+cd python
+ls
+cd tools
+ls
+cd ..
+ls
+cd ..
+ls
+cd tools
+ls
+cd graph_transforms
+ls
+cd ..
+ls
+cd ..
+ls
+cd python
+ls
+cd tools
+ls
+cd ..
+ls
+cd tensorflow
+ls
+cd bazel-bin
+ls
+cd tensorflow
+ls
+cd tools
+ls
+cd graph_transforms
+ls
+cd _objs
+ls
+cd transform_graph_lib
+ls
+cd tensorflow
+ls
+cd tools
+ls
+cd graph_transforms
+ls
+cd ..
+ls
+cd ..
+ls
+cd transform_utils
+ls
+cd tensorflow
+ls
+cd tools
+ls
+cd graph_transforms
+ls
+cd ..
+cd ...
+cd ..
+ls
+cd ..
+ls
+cd ..
+ls
+cd tensorflow
+ls
+cd tools
+ls
+cd ..
+ls
+cd tensorflow
+ls
+cd tools
+ls
+cd graph_transforms
+ls
+python
+cd python
+ls
+cd ..
+ls
+cd bazel-bin
+ls
+cd tensorflow
+ls
+cd tools
+ls
+cd graph_transforms
+ls
+bazel build tensorflow/tools/graph_transforms:transform_graph
+cd ..
+ls
+bazel build tensorflow/tools/graph_transforms:transform_graph
+ls
+cd bazel-bin
+ls
+cd tensorflow
+ls
+cd tools
+ls
+cd graph_transforms
+ls
+cd ..
+ls
+cd inference-walkthrough
+ls
+cd src
+python ~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_resize_and_conv
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+python
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_resize_and_conv
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+python
+ls
+rm NVIDIA-Linux-x86_64-375.66.run
+python
+ls
+rm frozen_graph.pb
+ls
+rm optimized_graph.pb
+rm eightbit_graph.pb
+ls
+cd ..
+ls
+cd ..
+ls
+python
+ls
+cd inference-walkthrough
+cd src
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+cd ..
+ls
+cd tensorfloqw
+cd tensorflow
+ls
+cd bazel-bin
+cd tensorflow
+ls
+cd tools
+ls
+cd ..
+ls
+cd python
+ls
+cd tools
+ls
+cd ..
+- bazel build tensorflow/python/tools:freeze_graph
+bazel build tensorflow/python/tools:freeze_graph
+cd ..
+ls
+cd inference-walkthrough
+cd src
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+cd ..
+cd tensorflow
+ls
+bazel build tensorflow/python/tools:optimize_for_inference
+cd ..
+ls
+cd inference-walkthrough
+cd src
+~/tensorflow/bazel-bin/tensorflow/python/tools/optimize_for_inference --input=frozen_graph.pb --output=optimized_graph.pb --frozen_graph=True --input_names=image_input --output_names=Softmax
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_resize_and_conv
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+python
+cd tensorflow
+ls
+./configure
+- bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
+bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
+bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+cd /tmp/tensorflow_pkg
+ls
+pip install /tmp/tensorflow_pkg/tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl
+pip uninstall tensorflow
+pip install /tmp/tensorflow_pkg/tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl
+cd ..
+ls
+cd home/ubuntu
+ls
+cd inference-walkthrough/src
+ls
+rm frozen_graph.pb
+rm eightbit_graph.pb
+rm optimized_graph.pb
+ls
+~/tensorflow/bazel-bin/tensorflow/python/tools/freeze_graph --input_graph=base_graph.pb --input_checkpoint=ckpt --input_binary=true --output_graph=frozen_graph.pb --output_node_names=Softmax
+~/tensorflow/bazel-bin/tensorflow/python/tools/optimize_for_inference --input=frozen_graph.pb --output=optimized_graph.pb --frozen_graph=True --input_names=image_input --output_names=Softmax
+~/tensorflow/bazel-bin/tensorflow/tools/graph_transforms/transform_graph --in_graph=frozen_graph.pb --out_graph=eightbit_graph.pb --inputs=image_input --outputs=Softmax --transforms='
+add_default_attributes
+remove_nodes(op=Identity, op=CheckNumerics)
+fold_constants(ignore_errors=true)
+fold_batch_norms
+fold_old_batch_norms
+fuse_resize_and_conv
+quantize_weights
+quantize_nodes
+strip_unused_nodes
+sort_by_execution_order'
+python
+ls
+rm frozen_graph.pb
+rm eightbit_graph.pb
+rm optimized_graph.pb
+ls
+cd ..
+ls

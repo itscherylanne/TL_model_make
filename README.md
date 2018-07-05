@@ -124,7 +124,7 @@ sudo apt-get install protobuf-compiler python-pil python-lxml python-tk
 ```
 3. Create a new directory somewhere and name it ``tensorflow``
 4. Clone TensorFlow's *models* repository from the ``tensorflow`` directory by executing
-```### Linux
+```
 mkdir tensorflow
 cd tensorflow
 git clone https://github.com/tensorflow/models.git
