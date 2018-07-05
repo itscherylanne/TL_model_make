@@ -71,7 +71,7 @@ chmod +x 02_download_and_unzip_models.sh
 There are 4 different TF record files:
 - [real_data.record] (https://drive.google.com/open?id=1ezhKl2B4T_TJv-eJYsU_ub_bmMKi8iwr)
 - [sim_data.record] (https://drive.google.com/open?id=1I1OV2Mi1regq73U4wOXue4qEldgjZaob)
-- [bosch_train.record] (https://drive.google.com/open?id=1iBmPV182itpleDSv8ZHviNwa4v_MoExR)
+- [bosch_train.record] (https://drive.google.com/open?id=1iBmPV182itpleDSv8ZHviNwa4v_MoExR) <-- I am working on this one.
 - [bosch_train_14labels.record] (https://drive.google.com/open?id=1e7mYNrVtYrwW3XjDjUMzIHBI69XcsJIH)
 
 
