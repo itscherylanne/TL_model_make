@@ -26,3 +26,7 @@ models/ssd_mobilenet_v1_coco_11_06_2017
 
 tensorflow/models/
 test_vid_jupyter/*.mp4
+
+models/train/ssd_inception_v2_bosch_train_udacity_label\.tar\.gz
+
+models/train/ssd_inception_v2_bosch_train_udacity_label/

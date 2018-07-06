@@ -125,7 +125,7 @@ When training is finished the trained model needs to be exported as a frozen inf
 
 To freeze the graph:
 ```
-python export_inference_graph.py --input_type image_tensor --pipeline_config_path ./config/your_tensorflow_model.config --trained_checkpoint_prefix ./models/train/model.ckpt-20000 --output_directory models
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path ./config/ssd_inception_v2_bosch_train_udacity_label.config --trained_checkpoint_prefix ./models/train/model.ckpt-20000 --output_directory models
 ```
 This will freeze and output the graph as ``frozen_inference_graph.pb``.
 
@@ -133,8 +133,17 @@ This will freeze and output the graph as ``frozen_inference_graph.pb``.
 Download your frozen graph to your local computer:
 ```
 scp -i ~/capstone.pem \
-        ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/models/train/frozen_inference_graph.pb \
-        ~/Development/TL_model_make/model/train/<some_unique_name>_frozen_inference_graph.pb
+        ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/models/train/* \
+        ~/Development/TL_model_make/models/train/
+
+scp -i ~/capstone.pem \
+        ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/models/frozen_inference_graph.pb \
+        ~/Development/TL_model_make/models/train/
+
+scp -i ~/capstone.pem \
+        ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/models/model.* \
+        ~/Development/TL_model_make/models/train/
+
 ```   
 ---------------
 ### Random notes to self

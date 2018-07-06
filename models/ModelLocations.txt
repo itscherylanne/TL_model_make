@@ -3,3 +3,6 @@ http://download.tensorflow.org/models/object_detection/ssd_inception_v2_coco_11_
 http://download.tensorflow.org/models/object_detection/rfcn_resnet101_coco_11_06_2017.tar.gz
 http://download.tensorflow.org/models/object_detection/faster_rcnn_resnet101_coco_11_06_2017.tar.gz
 http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_resnet_v2_atrous_coco_11_06_2017.tar.gz
+
+ssd_inception_v2_bosch_train_udacity_label (Pretty lousy in detection)
+https://drive.google.com/open?id=1eADTkW1m8jYOxr95DbBj_hFgD-pDbGj-
