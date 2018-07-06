@@ -108,7 +108,7 @@ Upload the config file to your EC2 instance.
 Example:
 ```
 scp -i ~/capstone.pem \
-        ~/Development/TL_model_make/config/ssd_inception_v2_bosch_train_udacity_label.config \
+        ~/Development/TL_model_make/config/faster_rcnn_inception_v2_real_data.config \
         ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/config
 ```
 
@@ -116,7 +116,12 @@ scp -i ~/capstone.pem \
 I already have a copy of the `train.py` script from `tensorflow/models/research/object_detection`. All you need to do is run the command:
 
 ```
-python train.py --logtostderr --train_dir=./models/train --pipeline_config_path=./config/your_tensorflow_model.config
+cd models
+rm -r train
+mkdir train
+cd ..
+
+python train.py --logtostderr --train_dir=./models/train --pipeline_config_path=./config/faster_rcnn_inception_v2_real_data.config
 ```
 
 
@@ -125,7 +130,11 @@ When training is finished the trained model needs to be exported as a frozen inf
 
 To freeze the graph:
 ```
-python export_inference_graph.py --input_type image_tensor --pipeline_config_path ./config/ssd_inception_v2_bosch_train_udacity_label.config --trained_checkpoint_prefix ./models/train/model.ckpt-20000 --output_directory models
+cd models
+mkdir ssd_mobilenet_v1_real_data
+cd ..
+
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path ./config/ssd_mobilenet_v1_real_data.config --trained_checkpoint_prefix ./models/train/model.ckpt-40000 --output_directory models/ssd_mobilenet_v1_real_data
 ```
 This will freeze and output the graph as ``frozen_inference_graph.pb``.
 
@@ -143,6 +152,10 @@ scp -i ~/capstone.pem \
 scp -i ~/capstone.pem \
         ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/models/model.* \
         ~/Development/TL_model_make/models/train/
+
+scp -i ~/capstone.pem \
+        ubuntu@ec2-XX-XX-XXX-XXX.us-west-1.compute.amazonaws.com:~/TL_model_make/models/ssd_mobilenet_v1_real_data/* \
+        ~/Development/TL_model_make/models/ssd_mobilenet_v1_real_data
 
 ```   
 ---------------
